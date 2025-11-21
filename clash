@@ -1,0 +1,16 @@
+name: export-clash-and-dashboard-tar
+on:
+  workflow_dispatch:   # 允许手动触发
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull & Save image
+        run: |
+          docker pull clash-and-dashboard
+          docker save -o clash.tar clash-and-dashboard
+      - name: Upload tar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clash-tar
+          path: clash.tar
